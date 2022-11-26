@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"job-search-api/controllers"
+	"job-search-api/middlewares"
 	"log"
 	"net/http"
 
@@ -11,6 +12,9 @@ import (
 
 func main() {
 	router := mux.NewRouter()
+
+	// add JWTAuth middleware
+	router.Use(middlewares.JwtAuthentication)
 
 	router.HandleFunc("/login", controllers.Login()).Methods("POST")
 
