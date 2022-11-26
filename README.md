@@ -3,6 +3,14 @@
 
 API Endpoint Host : http://103.134.154.18:30822/
 
+I've deployed this project to my personal VPS, and deployed to `single-node kubernetes`
+
+This project is configured to be able to containerized using docker (Dockerfile). <br> And deployed on a single-node kubernetes cluster. (Deployment.yaml)
+
+Here is what i mean by single-node cluster, go checkout my story on medium here: <br>
+https://reinhardjsilalahi.medium.com/beginners-guide-simple-hello-kubernetes-all-in-one-on-a-single-vps-fcfdfee9edfc
+
+
 ### Login
 `GET` http://103.134.154.18:30822/login
 
@@ -32,7 +40,7 @@ Example Response Payload:
 
 <br>
 
-### Get list of position
+### Get position list
 `GET` http://103.134.154.18:30822/positions?description={description}&location={location}&page={page}
 
 Authentication : `Bearer <Token>`
