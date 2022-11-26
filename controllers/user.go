@@ -13,6 +13,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func Login() http.HandlerFunc {
@@ -45,6 +46,15 @@ func Login() http.HandlerFunc {
 			return
 		}
 
+		err = bcrypt.CompareHashAndPassword([]byte(result.Password), []byte(user.Password))
+		if err != nil && err == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
+			response := responses.BaseResponse{Status: http.StatusBadRequest, Message: "Invalid login credentials. Please try again", Data: map[string]interface{}{}}
+			rw.WriteHeader(response.Status)
+			json.NewEncoder(rw).Encode(response)
+			return
+		}
+		user.Password = ""
+
 		// create JWT token
 		threeMinutes := (time.Hour / 60) * 3
 		tk := &models.Token{Email: result.Email, RegisteredClaims: jwt.RegisteredClaims{
@@ -53,7 +63,7 @@ func Login() http.HandlerFunc {
 		token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 		tokenString, _ := token.SignedString([]byte(os.Getenv("token_secret_key")))
 
-		response := responses.BaseResponse{Status: http.StatusOK, Message: "token", Data: map[string]interface{}{"email": user.Email, "token": tokenString}}
+		response := responses.BaseResponse{Status: http.StatusOK, Message: "this token will be valid for the next 3 minutes, login again if it expired", Data: map[string]interface{}{"email": user.Email, "token": tokenString}}
 		rw.WriteHeader(response.Status)
 		json.NewEncoder(rw).Encode(response)
 		return
