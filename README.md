@@ -1,5 +1,8 @@
 
 ## Endpoints
+
+API Endpoint Host : http://103.134.154.18:30822/
+
 ### Login
 `GET` http://103.134.154.18:30822/login
 
