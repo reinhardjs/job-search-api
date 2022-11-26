@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"job-search-api/controllers"
 	"log"
 	"net/http"
 
@@ -11,6 +12,8 @@ import (
 func main() {
 	router := mux.NewRouter()
 
-	fmt.Println("Starting at http://localhost:8080")
+	router.HandleFunc("/login", controllers.Login()).Methods("POST")
+
+	fmt.Println("Starting at port 8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
