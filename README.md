@@ -14,7 +14,7 @@ https://reinhardjsilalahi.medium.com/beginners-guide-simple-hello-kubernetes-all
 
 
 ### Login
-`GET` http://103.134.154.18:30822/login
+`POST` http://103.134.154.18:30822/login
 
 Authentication : `Bearer <Token>`
 
