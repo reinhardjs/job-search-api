@@ -16,6 +16,7 @@ func main() {
 	// add JWTAuth middleware
 	router.Use(middlewares.JwtAuthentication)
 
+	router.HandleFunc("/positions", controllers.GetPositions()).Methods("GET")
 	router.HandleFunc("/login", controllers.Login()).Methods("POST")
 
 	fmt.Println("Starting at port 8080")
