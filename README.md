@@ -1,5 +1,4 @@
-
-![image](https://user-images.githubusercontent.com/7758970/204094428-555316c1-8513-4d03-b426-7790cf528190.png)
+![image](https://user-images.githubusercontent.com/7758970/204094536-45b1bf58-ea32-42ca-9e63-fe9638886b9d.png)
 
 ## Endpoints
 
