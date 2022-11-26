@@ -16,6 +16,7 @@ func main() {
 	// add JWTAuth middleware
 	router.Use(middlewares.JwtAuthentication)
 
+	router.HandleFunc("/positions/{positionId}", controllers.GetPosition()).Methods("GET")
 	router.HandleFunc("/positions", controllers.GetPositions()).Methods("GET")
 	router.HandleFunc("/login", controllers.Login()).Methods("POST")
 
